@@ -1,0 +1,42 @@
+{
+    "language": "C++",
+    "dependency_file": "CMakeLists.txt",
+    "dependencies": ["Boost.Asio", "Eigen3"],
+    "files": [
+        {
+            "path": "src/MonoAgeAnalyzer.h",
+            "description": "Header file for monocyte aging analysis",
+            "exports": ["class MonoAgeAnalyzer", "struct MonocyteSample", "std::vector<MonocyteSample> loadSamples(const std::string&)"]
+        },
+        {
+            "path": "src/MonoAgeAnalyzer.cpp",
+            "description": "Implementation of monocyte aging analysis logic",
+            "imports_from_other_files": ["MonoAgeAnalyzer.h"]
+        },
+        {
+            "path": "src/DepressionModel.h",
+            "description": "Header file for depression risk prediction model",
+            "exports": ["class DepressionModel", "double predictRisk(const MonocyteSample&)"]
+        },
+        {
+            "path": "src/DepressionModel.cpp",
+            "description": "Implementation of depression risk prediction model",
+            "imports_from_other_files": ["DepressionModel.h", "MonoAgeAnalyzer.h"]
+        },
+        {
+            "path": "src/main.cpp",
+            "description": "Main entry point of the application",
+            "imports_from_other_files": ["MonoAgeAnalyzer.h", "DepressionModel.h"]
+        },
+        {
+            "path": "src/CLIHandler.h",
+            "description": "Command line interface handler",
+            "exports": ["void parseCommandLine(int argc, char* argv[])", "struct CLIOptions"]
+        },
+        {
+            "path": "src/CLIHandler.cpp",
+            "description": "Implementation of command line parsing",
+            "imports_from_other_files": ["CLIHandler.h", "MonoAgeAnalyzer.h", "DepressionModel.h"]
+        }
+    ]
+}
